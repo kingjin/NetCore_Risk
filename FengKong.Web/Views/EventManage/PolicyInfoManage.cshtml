@@ -1,0 +1,71 @@
+﻿
+@{
+    ViewData["Title"] = "PolicyInfoManage";
+
+    var appList = (List<FengKong.Models.AppInfoModel>)ViewBag.AppInfoList;
+    var eventList = (List<FengKong.Models.EventInfoModel>)ViewBag.EventInfoList;
+}
+<div class="panel panel-default">
+    <!-- Default panel contents -->
+    <div class="panel-heading">
+        <span>策略列表</span>
+    </div>
+    <div class="panel-body">
+        <!---信息筛选-start--->
+        <div class="row" style="padding-bottom: 10px; padding-top: 10px;">
+            <div class="col-sm-2">
+                <div class=" input-group">
+                    <span class="input-group-addon">AppName</span>
+                    <select class="form-control" id="selAppId">
+                        @foreach (var app in appList)
+                        {
+                            <option value="@app.app_id">@app.app_name</option>
+                        }
+                    </select>
+                </div>
+            </div>
+            <div class="col-sm-2">
+                <div class=" input-group">
+                    <span class="input-group-addon">EventName</span>
+                    <select class="form-control" id="selEventCode">
+                        @foreach (var even in eventList)
+                        {
+                            <option value="@even.event_code">@even.event_name</option>
+                        }
+                    </select>
+                </div>
+            </div>
+            <div class="col-sm-2">
+                <a class="btn btn-success" href="javascript:Add('/EventManage/PolicyInfoEdit/0?')">新增策略</a>
+            </div>
+        </div>
+
+        <!---信息筛选-end--->
+        <!---表格列表-start--->
+        <div class="row online-table" id="divContent" style="padding:10px;">
+        </div>
+        <!---表格列表-end--->
+    </div>
+</div>
+@section Scripts{
+    <script>
+    var pinx = 1;
+    $(function () {
+        Search(1);
+    });
+        function Search(inx) {
+            pinx = inx;
+            var url = '@Url.Action("PolicyInfoManageResult")';
+            $.post(url, { Account: $("#txtAppName").val(), p: pinx, userCategory: 4 }, function (data) {
+                $("#divContent").html(data);
+            });
+        }
+
+        function Add(url) {
+            var appid = $("#selAppId").val()
+            var eventcode = $("#selEventCode").val()
+            var link = url + "appid=" + appid + "&eventcode=" + eventcode;
+            document.location.href = link;
+        }
+    </script>
+}

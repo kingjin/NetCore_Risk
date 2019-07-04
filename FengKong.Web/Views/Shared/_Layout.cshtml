@@ -1,0 +1,187 @@
+﻿@{
+
+    string role = "超级管理员";
+}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="-策略风控">
+    <meta name="author" content="信息安全">
+
+    <!-- App title -->
+    <title>-策略风控</title>
+
+    @RenderSection("CSS", false)
+    <!-- App CSS -->
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css" />
+    <link rel="stylesheet" href="~/css/site.css" />
+    <link rel="stylesheet" href="~/css/menu.css" />
+    <link rel="stylesheet" href="~/css/icons.css" />
+    <link rel="stylesheet" href="~/css/core.css" />
+</head>
+
+
+<body class="fixed-left">
+
+    <!-- Begin page -->
+    <div id="wrapper">
+
+        <!-- Top Bar Start -->
+        <div class="topbar">
+
+            <!-- LOGO -->
+            <div class="topbar-left">
+                <a href="/" class="logo"><span>策略风控</span><i class="zmdi zmdi-layers"></i></a>
+            </div>
+
+            <!-- Button mobile view to collapse sidebar menu -->
+            <div class="navbar navbar-default" role="navigation">
+                <div class="container">
+
+                    <!-- Page title -->
+                    <ul class="nav navbar-nav navbar-left">
+                        <li>
+                            <button class="button-menu-mobile open-left">
+                                <i class="zmdi zmdi-menu"></i>
+                            </button>
+                        </li>
+                        <li>
+                            <h4 class="page-title">-平台</h4>
+                        </li>
+                    </ul>
+                </div>
+                <!-- end container -->
+            </div>
+            <!-- end navbar -->
+        </div>
+        <!-- Top Bar End -->
+        <!-- ========== Left Sidebar Start ========== -->
+        <div class="left side-menu">
+            <div class="sidebar-inner slimscrollleft">
+
+                <!-- User -->
+                <div class="user-box">
+                    <div class="user-img">
+                        <img src="~/images/v.jpg" alt="user-img" title="Admin" class="img-thumbnail img-responsive">
+                    </div>
+
+                    <h5><a href="#">@role</a> </h5>
+                    <ul class="list-inline">
+                        <li>
+                            <a href="/common/exit" class="text-custom">
+                                <i class="zmdi zmdi-power"></i>
+                            </a>
+                        </li>
+                    </ul>
+
+
+                </div>
+                <!-- End User -->
+                <!--- Sidemenu -->
+
+                <div id="sidebar-menu">
+                    <ul>
+
+                        @if (!string.IsNullOrWhiteSpace(role))
+                        {
+                            <li class="text-muted menu-title">菜单</li>
+                            if (role == "超级管理员" || role == "管理员")
+                            {
+                                <li>
+                                    <a href="javascript:void(0);" class="waves-effect">
+                                        <i class="fa fa-user-secret"></i><span>事件-策略</span><span class="menu-arrow"></span>
+                                    </a>
+                                    <ul class="list-unstyled">
+                                        <li><a href="/EventManage/AppInfoManage">应用管理</a></li>
+                                        <li><a href="/EventManage/EventInfoManage">事件管理</a></li>
+                                        <li><a href="/EventManage/PolicyInfoManage">策略管理</a></li>
+                                        <li><a href="#">字段管理</a></li>
+                                        <li><a href="#">指标管理</a></li>
+
+                                    </ul>
+                                </li>
+                                <li>
+                                    <a href="javascript:void(0);" class="waves-effect">
+                                        <i class="fa fa-user-plus"></i><span>监控日志</span><span class="menu-arrow"></span>
+                                    </a>
+                                    <ul class="list-unstyled">
+                                        <li><a href="/LogManage/FengKongLogList">风控日志</a></li>
+                                        <li><a href="#">监控管理</a></li>
+                                        <li><a href="#">名单管理</a></li>
+                                    </ul>
+                                </li>
+                                <li>
+                                    <a href="javascript:void(0);" class="waves-effect">
+                                        <i class="fa fa-user-plus"></i><span>系统管理</span><span class="menu-arrow"></span>
+                                    </a>
+                                    <ul class="list-unstyled">
+                                        <li><a href="#">账号管理</a></li>
+                                        <li><a href="#">权限管理</a></li>
+                                        <li><a href="#">通用字段</a></li>
+                                        <li><a href="#">风险管理</a></li>
+                                    </ul>
+                                </li>
+                            }
+                        }
+
+                    </ul>
+
+                    <div class="clearfix"></div>
+                </div>
+                <!-- Sidebar -->
+                <div class="clearfix"></div>
+
+            </div>
+
+        </div>
+        <!-- Left Sidebar End -->
+        <!-- ============================================================== -->
+        <!-- Start right Content here -->
+        <!-- ============================================================== -->
+        <div class="content-page">
+            <!-- Start content -->
+            <div class="content">
+                @RenderBody()
+            </div>
+            <!-- content -->
+
+            <footer class="footer hide">
+                2019 © Tongcheng Security Team
+            </footer>
+
+        </div>
+        <!-- End content-page -->
+        <!-- ============================================================== -->
+        <!-- End Right content here -->
+        <!-- ============================================================== -->
+
+    </div>
+    <!-- END wrapper -->
+
+
+
+    <script>var resizefunc = [];</script>
+
+    <!-- jQuery  -->
+    <script src="~/lib/jquery/dist/jquery.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.js"></script>
+    <script src="~/js/jquery.app.js"></script>
+    <script src="~/js/jquery.nicescroll.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    @RenderSection("Scripts", false)
+    <script>
+        //默认菜单是打开的
+        $(function () {
+            var path = location.pathname;
+            if (path.lastIndexOf("/") > 0) {
+                var menuItem = $("[href='" + path + "']");
+                menuItem.css("color", "#71b6f9")
+                menuItem.parent().parent().parent().find("a[class='waves-effect']").click();
+                console.log(menuItem.parent().parent().parent()[0]);
+            }
+        });
+    </script>
+</body>
+</html>

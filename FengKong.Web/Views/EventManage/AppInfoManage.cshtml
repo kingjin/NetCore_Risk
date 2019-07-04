@@ -1,0 +1,53 @@
+﻿@{
+    ViewData["Title"] = "AppInfoManage";
+}
+<div class="panel panel-default">
+    <!-- Default panel contents -->
+    <div class="panel-heading">
+        <span>应用列表</span>
+    </div>
+    <div class="panel-body">
+        <!---信息筛选-start--->
+        <div class="row" style="padding-bottom: 10px; padding-top: 10px;">
+            <div class="col-sm-2">
+                <a class="btn btn-success" href="/EventManage/AppInfoEdit/0">新增应用</a>
+            </div>
+            <div class="col-sm-2">
+                <button class="btn btn-success" onclick="PushToNginx()">推送到负载【Nginx】</button>
+            </div>
+        </div>
+        <!---信息筛选-end--->
+        <!---表格列表-start--->
+        <div class="row online-table" id="divContent" style="padding:10px;">
+        </div>
+        <!---表格列表-end--->
+    </div>
+</div>
+
+@section Scripts{
+<script>
+    var pinx = 1;
+    $(function () {
+        Search(1);
+    });
+    function Search(inx) {
+        pinx = inx;
+        var url = '@Url.Action("AppInfoManageResult")';
+        $.post(url, { Account: $("#txtAppName").val(), p: pinx, userCategory: 4 }, function (data) {
+            $("#divContent").html(data);
+        });
+        }
+        function PushToNginx() {
+            var appid = "";
+            $(".cbAppId").each(function (inx,item) {
+                appid += item.value + ",";
+            });
+            var pushUrl = "/EventManage/PushAppInfoToNginx?appid=";
+            $.post(pushUrl, { appid: appid }, function (res) {
+                alert(res);
+            });
+
+        }
+
+</script>
+}

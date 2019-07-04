@@ -1,0 +1,70 @@
+﻿
+@{
+    ViewData["Title"] = "AppInfoEdit";
+}
+
+@model FengKong.Models.EventInfoModel
+
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <span>事件编辑</span>
+    </div>
+    <div class="panel-body">
+        <div class="row">
+            <div class="tab-content">
+                <!----基本信息-->
+                <div class="tab-pane  active" role="tabpanel" id="home">
+                    <!---表格列表-start--->
+                    <div class="row openclass">
+                        <div class="form-horizontal">
+                            <div class="form-group">
+                                <label class="col-xs-3 col-md-2 control-label">event_code：</label>
+                                <div class="col-xs-5 col-md-5">
+                                    <input type="text" id="txt_app_id" class="form-control" value="@Model.app_id">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-xs-3 col-md-2 control-label">event_code：</label>
+                                <div class="col-xs-5 col-md-5">
+                                    <input type="text" id="txt_event_code" class="form-control" value="@Model.event_code">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-xs-3 col-md-2 control-label">event_name：</label>
+                                <div class="col-xs-5 col-md-5">
+                                    <input type="text" id="txt_event_name" class="form-control" value="@Model.event_name">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-xs-3 col-md-2 control-label">event_type：</label>
+                                <div class="col-xs-5 col-md-5">
+                                    <input type="text" id="txt_event_type" class="form-control" value="@Model.event_type">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-xs-3 col-md-2 control-label">&nbsp;</label>
+                                <div class="col-xs-5 col-md-5">
+                                    <input type="button" class="btn btn-primary" onclick="Save()" value="Save" />
+                                    <input type="button" class="btn btn-default" onclick="history.go(-1)" value="返回" />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    function Save() {
+        var url = '@Url.Action("EventInfoSave")';
+        $.post(url, {
+            app_id: $("#txt_app_id").val(),
+            event_code: $("#txt_event_code").val(),
+            event_name: $("#txt_event_name").val(),
+            event_type: $("#txt_event_type").val(),
+        }, function (data) {
+            alert(data);
+        });
+    }
+</script>

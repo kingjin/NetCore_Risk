@@ -1,0 +1,56 @@
+﻿
+@{
+    ViewData["Title"] = "AppInfoEdit";
+}
+
+@model FengKong.Models.AppInfoModel
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <span>应用编辑</span>
+    </div>
+    <div class="panel-body">
+        <div class="row">
+            <div class="tab-content">
+                <!----基本信息-->
+                <div class="tab-pane  active" role="tabpanel" id="home">
+                    <!---表格列表-start--->
+                    <div class="row openclass">
+                        <div class="form-horizontal">
+                            <div class="form-group">
+                                <label class="col-xs-3 col-md-2 control-label">app_id：</label>
+                                <div class="col-xs-5 col-md-5">
+                                    <input type="text" id="txt_app_id" class="form-control" value="@Model.app_id">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-xs-3 col-md-2 control-label">app_name：</label>
+                                <div class="col-xs-5 col-md-5">
+                                    <input type="text" id="txt_app_name" class="form-control" value="@Model.app_name">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-xs-3 col-md-2 control-label">&nbsp;</label>
+                                <div class="col-xs-5 col-md-5">
+                                    <input type="button" class="btn btn-primary" onclick="Save()" value="Save" />
+                                    <input type="button" class="btn btn-default" onclick="history.go(-1)" value="返回" />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    function Save() {
+        var url = '@Url.Action("AppInfoSave")';
+        $.post(url, {
+            app_id: $("#txt_app_id").val(),
+            app_name: $("#txt_app_name").val(),
+        }, function (data) {
+            alert(data);
+        });
+    }
+</script>

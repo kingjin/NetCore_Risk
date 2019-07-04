@@ -1,0 +1,28 @@
+﻿
+@{
+    Layout = null;
+}
+<style type="text/css">
+</style>
+@model List<FengKong.Models.FengKongLogModel>
+
+<table class="table table-striped table-bordered">
+    <tr role="row">
+        <th>app_id</th>
+        <th>event_code</th>
+        <th>in_pamrs</th>
+        <th>create_date</th>
+    </tr>
+    @foreach (var item in Model)
+    {
+
+
+        <tr>
+            <td>@item.app_id</td>
+            <td>@item.event_code</td>
+            <td>@item.in_pamrs</td>
+            <td>@item.create_date</td>
+        </tr>
+
+    }
+</table>

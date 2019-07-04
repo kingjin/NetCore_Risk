@@ -1,0 +1,88 @@
+﻿
+@{
+    ViewData["Title"] = "AppInfoEdit";
+}
+
+@model FengKong.Models.PolicyInfoModel
+
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <span>事件编辑</span>
+    </div>
+    <div class="panel-body">
+        <div class="row">
+            <div class="tab-content">
+                <!----基本信息-->
+                <div class="tab-pane  active" role="tabpanel" id="home">
+                    <!---表格列表-start--->
+                    <div class="row openclass">
+                        <div class="form-horizontal">
+                            <div class="form-group">
+                                <label class="col-xs-3 col-md-2 control-label">event_code：</label>
+                                <div class="col-xs-5 col-md-5">
+                                    <input type="text" id="txt_app_id" class="form-control" value="@Model.app_id">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-xs-3 col-md-2 control-label">event_code：</label>
+                                <div class="col-xs-5 col-md-5">
+                                    <input type="text" id="txt_event_code" class="form-control" value="@Model.event_code">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-xs-3 col-md-2 control-label">policy_code：</label>
+                                <div class="col-xs-5 col-md-5">
+                                    <input type="text" id="txt_policy_code" class="form-control" value="@Model.policy_code">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-xs-3 col-md-2 control-label">field：</label>
+                                <div class="col-xs-5 col-md-5">
+                                    <input type="text" id="txt_field" class="form-control" value="@string.Join(",", Model.field)">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-xs-3 col-md-2 control-label">max_size：</label>
+                                <div class="col-xs-5 col-md-5">
+                                    <input type="text" id="txt_max_size" class="form-control" value="@Model.max_size">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-xs-3 col-md-2 control-label">time_slice：</label>
+                                <div class="col-xs-5 col-md-5">
+                                    <input type="text" id="txt_time_slice" class="form-control" value="@Model.time_slice">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-xs-3 col-md-2 control-label">&nbsp;</label>
+                                <div class="col-xs-5 col-md-5">
+                                    <input type="button" class="btn btn-primary" onclick="Save()" value="Save" />
+                                    <input type="button" class="btn btn-default" onclick="history.go(-1)" value="返回" />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<input type="hidden" id="policy_id" value="@Model._id" />
+<script>
+    function Save() {
+        var url = '@Url.Action("PolicyInfoSave")';
+        $.post(url, {
+            policy_id: $("#policy_id").val(),
+            app_id: $("#txt_app_id").val(),
+            event_code: $("#txt_event_code").val(),
+            policy_code: $("#txt_policy_code").val(),
+            field: $("#txt_field").val(),
+            max_size: $("#txt_max_size").val(),
+            time_slice: $("#txt_time_slice").val()
+
+
+        }, function (data) {
+            alert(data);
+        });
+    }
+</script>
