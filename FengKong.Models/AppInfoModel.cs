@@ -1,10 +1,12 @@
 ﻿using MongoDB.Bson;
+using MongoDB.Bson.Serialization.Attributes;
 using System;
 using System.Collections.Generic;
 using System.Text;
 
 namespace FengKong.Models
 {
+    [BsonIgnoreExtraElements]
     public class AppInfoModel
     {
         public AppInfoModel()

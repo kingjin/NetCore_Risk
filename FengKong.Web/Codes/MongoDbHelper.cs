@@ -20,7 +20,7 @@ namespace FengKong.Web.Codes
                 string connectionName = "mongodb://127.0.0.1:27017";
                 var Client = new MongoClient(connectionName);
 
-                var database = Client.GetDatabase("FengKong");
+                var database = Client.GetDatabase("SecRisk");
                 return database;
             }
         }
