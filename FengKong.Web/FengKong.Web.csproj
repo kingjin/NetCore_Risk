@@ -13,7 +13,7 @@
   </ItemGroup>
 
   <ItemGroup>
-      <PackageReference Include="MongoDB.Driver" Version="2.11.4" />
+      <PackageReference Include="MongoDB.Driver" Version="2.19.0" />
     <ProjectReference Include="..\FengKong.Common\FengKong.Common.csproj" />
     <ProjectReference Include="..\FengKong.Models\FengKong.Models.csproj" />
     <ProjectReference Include="..\FengKong.Service\FengKong.Service.csproj" />
